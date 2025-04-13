@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width", initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+
+    <div id="human"></div>
+    <div id="computer"></div>
+    <div id="score"></div>
+
+    <script>
+        let humanScore = 0;
+        let computerScore = 0;
+
+        function getComputerChoice() {
+            const randomNum = Math.floor(Math.random() * 3);
+
+            let answer = (randomNum == 0) ? "rock" :
+            (randomNum == 1) ? "paper" :
+            (randomNum == 2) ? "scissors" : "error";  
+
+            computerDiv.textContent = `Computer: ${answer}`;
+            return answer;
+        }
+
+        function getHumanChoice() {
+            let answer = "error";
+            while(answer === "error") {
+                let HumanChoice = prompt("1 - rock\n2 - paper\n3 - scissors"); 
+
+                answer = (HumanChoice == 1) ? "rock" :
+                (HumanChoice == 2) ? "paper" :
+                (HumanChoice == 3) ? "scissors" : "error";  
+            }
+            console.log(`Human: ${answer}`);
+            return answer;
+        }
+
+        function playRound(humanChoice , computerChoice) {
+            let winner = "";
+
+            if (humanChoice === computerChoice) {
+                console.log(`Tie. Both choose ${humanChoice}`);
+            } else if (humanChoice === "rock" && computerChoice == "paper") {
+                console.log(`You loose. ${computerChoice} beats ${humanChoice}`);
+                computerScore += 1;
+            } else if (humanChoice === "rock" && computerChoice == "scissors") {
+                console.log(`You win. ${humanChoice} beats ${computerChoice}`);
+                humanScore += 1;
+            } else if (humanChoice === "scissors" && computerChoice == "paper") {
+                console.log(`You win. ${humanChoice} beats ${computerChoice}`);
+                humanScore += 1;
+            } else if (humanChoice === "scissors" && computerChoice == "rock") {
+                console.log(`You loose. ${computerChoice} beats ${humanChoice}`);
+                computerScore += 1;
+            } else if (humanChoice === "paper" && computerChoice == "rock") {
+                console.log(`You win. ${humanChoice} beats ${computerChoice}`);
+                humanScore += 1;
+            } else if (humanChoice === "paper" && computerChoice == "scissors") {
+                console.log(`You loose. ${computerChoice} beats ${humanChoice}`);
+                computerScore += 1;
+            }
+            scoreDiv.textContent = `Human vs Computer: ${humanScore} : ${computerScore}`;
+        }
+
+        function buttonChoice (e) {
+            humanSelection = e.target.id;
+            humanDiv.textContent = `Human: ${humanSelection}`;
+            console.log(`Human: ${humanSelection}`);
+            humanSelection === rock ? humanSelection = 1 : 
+            humanSelection === paper ? humanSelection = 2 :
+            humanSelection === scissors ? humanSelection = 3 : 'error';
+            computerSelection = getComputerChoice();
+
+            playRound(humanSelection, computerSelection);
+            if (humanScore >= 5) {
+                scoreDiv.textContent = `You Win!`;
+                buttons.forEach(button => button.removeEventListener('click', buttonChoice));
+            }   
+            if (computerScore >= 5) {
+                scoreDiv.textContent = "You Lose!";
+                buttons.forEach(button => button.removeEventListener('click', buttonChoice));
+            }
+        }
+
+        let humanSelection;
+        let computerSelection;
+        
+        const buttons = document.querySelectorAll('button');
+        const humanDiv = document.querySelector('#human');
+        const computerDiv = document.querySelector('#computer');
+        const scoreDiv = document.querySelector('#score');
+
+        buttons.forEach(button => button.addEventListener('click', buttonChoice));
+    </script>
+</body>
+</html>

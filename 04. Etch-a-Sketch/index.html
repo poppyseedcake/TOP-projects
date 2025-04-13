@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Etch-a-Sketch</title>
+</head>
+<body>
+    <button id="newgrid">Set a new grid</button>
+    <div id="container"></div>
+
+    <script>
+        const container = document.querySelector('#container');
+        const button = document.querySelector('#newgrid');
+        let timeoutId; 
+
+        function newgrid() {
+            let size = 0;
+            do  {
+                if (size > 100) alert("rozmiar ma być mniejszy niż 100!");
+                size = parseInt(prompt("Podaj rozmiar boku nowego grida."));
+            } while (size > 100);
+            
+            const currentDivs = container.querySelectorAll('.block');
+            currentDivs.forEach(div => div.remove());
+            
+            document.documentElement.style.setProperty('--block_number', size);
+            drawgrid(size);
+        }
+
+        function drawgrid(size = 16) {
+            const totalblocks = size * size;
+            for(let i = 0; i < totalblocks; i++) {
+                let block = document.createElement("div");
+                block.className = "block";
+                container.appendChild(block);
+            }
+            const divs = document.querySelectorAll('div .block');
+            divs.forEach(div => div.addEventListener('mouseenter', () => {
+                div.classList.add("hov");
+                const r = Math.floor(Math.random() * 255);
+                const g = Math.floor(Math.random() * 255);
+                const b = Math.floor(Math.random() * 255);
+                div.style.backgroundColor = `rgb(${r},${g},${b})`;
+            }));
+
+            // divs.forEach(div => div.addEventListener('mouseleave', () => {
+            //     timeoutId = setTimeout(() => {
+            //         div.classList.remove("hov");
+            //     }, 500);
+            // }));
+        }
+
+        drawgrid();
+
+        button.addEventListener('click', newgrid);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+* {
+    box-sizing: border-box;
+    background-color: var(--main-bg);
+    font-family: "Roboto Mono", serif;
+    /* font-family: "Montserrat", serif; */
+    font-weight: 400;
+    font-style: normal;
+    font-size: 35px;
+    color: var(--font-color);
+}
+
+:root {
+    --main-bg: #d6d3d1;
+    --calc-container: #505050;
+    --butons-func: #858585;
+    --button-number: #acacac;
+    --button-oper: #fb923c;
+    --radius: 20px;
+    --font-color: #fafaf9;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+}
+
+#container {
+    background-color: var(--calc-container);
+    width: 400px;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    justify-content: space-between;
+    border-radius: var(--radius);
+    box-shadow: 8px 8px 50px 0px var(--calc-container);
+}
+
+#displayFirst {
+    border-radius: var(--radius) var(--radius) 0 0;
+    height: 40px;
+    font-size: 20px;
+    padding-top: 10px;
+
+}
+
+#displaySecond {
+    height: 70px;
+
+}
+
+#displayFirst, #displaySecond {
+    /* border: 1px solid red; */
+    background-color: var(--calc-container);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+button {
+    width: 98.5px;
+    height: 100px;
+    border: none;
+    margin-top: 2px;
+    transition: all 0s;
+
+}
+
+.func {
+    background-color: var(--butons-func);
+}
+
+.number {
+    background-color: var(--button-number);
+}
+
+.operator {
+    background-color: var(--button-oper);
+}
+
+.radius-right {
+    border-radius: 0 0 var(--radius) 0;
+}
+
+.radius-left {
+    border-radius: 0 0 0 var(--radius);
+    width: 199px;
+}
+
+#debug {
+    color: red;
+    font-size: 17px;
+    font-weight: bold;
+    position: absolute;
+    top: 5px;
+    left: 30%;
+    background-color: transparent;
+}
+
+.hoverNum {
+    background-color: var(--butons-func);
+    transition: all 0.2s;
+}
+
+.hoverOperator {
+    background-color: #febf8c;
+    transition: all 0.2s;
+}
+
+.hoverFunc {
+    background-color: var(--button-number);
+    transition: all 0.2s;
+}

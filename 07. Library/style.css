@@ -1,0 +1,15 @@
+.container {
+    background-color: beige;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr ;
+    gap: 10px;
+}
+
+.card {
+    background-color: lightblue;
+    border: 1px solid blue;
+    width: 250px;
+    height: 150px;
+}

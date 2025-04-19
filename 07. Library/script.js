@@ -19,6 +19,35 @@ function addBookToLibrary(title, author, pages, read) {
     updateCards();
 }
 
+function updateCards() {
+    myLibrary.forEach(book => {
+        let select = document.querySelector('[data-uui="book-id"]');
+
+        if (select === null) {
+            let card = document.createElement('div');
+            let title = document.createElement('p');
+            let author = document.createElement('p');
+            let pages = document.createElement('p');
+            let read = document.createElement('p');
+        
+            title.textContent = `Title: ${book.title}`;
+            author.textContent = `Author: ${book.author}`;
+            pages.textContent = `Pages: ${book.pages}`;
+            read.textContent = book.read === 0 ? 'not read' : 'read';
+        
+            card.className = "card";
+            card.dataset.uuid = book.id;
+            card.appendChild(title);
+            card.appendChild(author);
+            card.appendChild(pages);
+            card.appendChild(read);
+        
+            containerCards.appendChild(card);
+        }
+    
+    });
+}
+
 const testBook1 = new Book(crypto.randomUUID(), 'Puchatek', 'Anders', 54, 0);
 const testBook2 = new Book(crypto.randomUUID(), 'Pony', 'Henry', 150, 1);
 const testBook3 = new Book(crypto.randomUUID(), 'Bajki robotow', 'Lem', 454, 1);
@@ -31,32 +60,7 @@ myLibrary.push(testBook4);
 
 const containerCards = document.querySelector('.container');
 
-function updateCards() {
-
-}
-
-
-myLibrary.forEach(book => {
-    let card = document.createElement('div');
-    let title = document.createElement('p');
-    let author = document.createElement('p');
-    let pages = document.createElement('p');
-    let read = document.createElement('p');
-
-    title.textContent = `Title: ${book.title}`;
-    author.textContent = `Author: ${book.author}`;
-    pages.textContent = `Pages: ${book.pages}`;
-    read.textContent = book.read === 0 ? 'not read' : 'read';
-
-    card.className = "card";
-    card.appendChild(title);
-    card.appendChild(author);
-    card.appendChild(pages);
-    card.appendChild(read);
-
-    containerCards.appendChild(card);
-
-});
+updateCards();
 
 const showBtn = document.querySelector(`#newBook`);
 const dialog = document.querySelector(`#dialog`);

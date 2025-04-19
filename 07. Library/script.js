@@ -76,10 +76,11 @@ showBtn.addEventListener('click', () => {
 
 closeBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    dialog.close();
+    dialog.close("");
 });
 
 dialog.addEventListener('close', (e) => {
+    console.log(dialog.returnValue);
     if (dialog.returnValue == 'submit') {
         addBookToLibrary(title.value, author.value, pages.value, read.value);
         title.value="";

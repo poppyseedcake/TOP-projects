@@ -11,14 +11,12 @@ function Book(id, title, author, pages, read) {
     }
 }
 
-function addBookToLibrary() {
+function addBookToLibrary(title, author, pages, read) {
     const id = crypto.randomUUID();
-    const title = prompt("Podaj nazwe ksiązki");
-    const author = prompt("Podaj autora");
-    const pages = prompt("Podaj liczbe stron");
-    const read = prompt("Czy przeczytałeś?");
-    const newBook = new Book(id, title, author, pages, read);
-    myLibrary.push(newBook);
+    const readBinary = read === 'yes' ? 1 : 0;
+    const newBook = new Book(id, title, author, pages, readBinary);
+    myLibrary.unshift(newBook);
+    updateCards();
 }
 
 const testBook1 = new Book(crypto.randomUUID(), 'Puchatek', 'Anders', 54, 0);
@@ -32,6 +30,11 @@ myLibrary.push(testBook3);
 myLibrary.push(testBook4);
 
 const containerCards = document.querySelector('.container');
+
+function updateCards() {
+
+}
+
 
 myLibrary.forEach(book => {
     let card = document.createElement('div');

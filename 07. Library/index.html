@@ -9,9 +9,44 @@
     <title>Library</title>
 </head>
 <body>
-    <button>Add New Book</button>
+    <dialog id="dialog">
+        <form method="dialog">
+            <p>Add a new book to the Library</p>
+            <p>
+                <label for="title">
+                Title:
+                <input type="text" name="title" id="title" required />
+                </label>
+            </p>
+            <p>
+                <label for="author">
+                Author:
+                <input type="text" name="author" id="author" required />
+                </label>
+            </p>
+            <p>
+                <label for="pages">
+                Pages:
+                <input type="text" name="pages" id="pages" required />
+                </label>
+            </p>
+            <p>
+                <label for="read">Did you read:</label>
+                    <select name="read" id="read" required>
+                        <option value="">Choose..</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+            </p>
+            <div>
+                <input type="submit" id="add" value="Add" />
+                <input type="submit" id="cancel" value="cancel" formmethod="dialog"/>
+            </div>
+        </form>
+    </dialog>
+    <button id="newBook">Add New Book</button>
     <div class="container">
-
+    
     </div>
 </body>
 </html>

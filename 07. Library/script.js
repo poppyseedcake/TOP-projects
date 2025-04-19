@@ -54,3 +54,35 @@ myLibrary.forEach(book => {
     containerCards.appendChild(card);
 
 });
+
+const showBtn = document.querySelector(`#newBook`);
+const dialog = document.querySelector(`#dialog`);
+const closeBtn = document.querySelector(`#cancel`);
+const submitBtn = document.querySelector('#add');
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
+const pages = document.querySelector('#pages');
+const read = document.querySelector('#read');
+
+showBtn.addEventListener('click', () => {
+    dialog.showModal();
+});
+
+closeBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    dialog.close();
+});
+
+dialog.addEventListener('close', (e) => {
+    if (dialog.returnValue == 'submit') {
+        console.log(title.value);
+        console.log(author.value);
+        console.log(pages.value);
+        console.log(read.value);
+    }
+});
+
+submitBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    dialog.close('submit');
+});

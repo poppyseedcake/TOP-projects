@@ -21,7 +21,7 @@ function addBookToLibrary(title, author, pages, read) {
 
 function updateCards() {
     myLibrary.forEach(book => {
-        let select = document.querySelector('[data-uui="book-id"]');
+        let select = document.querySelector(`[data-uuid="${book.id}"]`);
 
         if (select === null) {
             let card = document.createElement('div');
@@ -43,8 +43,7 @@ function updateCards() {
             card.appendChild(read);
         
             containerCards.appendChild(card);
-        }
-    
+        }   
     });
 }
 
@@ -82,10 +81,11 @@ closeBtn.addEventListener('click', (e) => {
 
 dialog.addEventListener('close', (e) => {
     if (dialog.returnValue == 'submit') {
-        console.log(title.value);
-        console.log(author.value);
-        console.log(pages.value);
-        console.log(read.value);
+        addBookToLibrary(title.value, author.value, pages.value, read.value);
+        title.value="";
+        author.value="";
+        pages.value="";
+        read.value="";
     }
 });
 

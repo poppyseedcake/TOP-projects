@@ -45,16 +45,13 @@ function updateCards() {
             readBtn.className = "readBtn";
 
             removeBtn.addEventListener('click', (e) => {
-                // const id = e.target.dataset.bookId;
-                // e.target.parentElement.remove();
-                // removeBook(id);
-                console.log(e.target);
+                const id = e.target.dataset.bookId;
+                e.target.parentElement.remove();
+                removeBook(id);
             });
 
             readBtn.addEventListener('click', (e) => {
-            //         updateRead(e);
-            console.log(e.target);
-
+                    updateRead(e);
             });
             
             card.className = "card";
@@ -66,7 +63,7 @@ function updateCards() {
             card.appendChild(removeBtn);
             card.appendChild(readBtn);
 
-            containerCards.prepend(card);
+            containerCards.prepend(card);       
             
         }   
     });
@@ -142,22 +139,4 @@ dialog.addEventListener('close', (e) => {
 submitBtn.addEventListener('click', (e) => {
     e.preventDefault();
     dialog.close('submit');
-});
-
-const removeBtn = document.querySelectorAll('.removeBtn');
-
-removeBtn.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-        let id = e.target.dataset.bookId;
-        e.target.parentElement.remove();
-        removeBook(id);
-    });
-});
-
-const readBtn = document.querySelectorAll('.readBtn');
-
-readBtn.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-        updateRead(e);
-    });
 });

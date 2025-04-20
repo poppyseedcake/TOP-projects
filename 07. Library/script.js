@@ -44,7 +44,19 @@ function updateCards() {
             readBtn.textContent = book.read === 0 ? 'read' : 'not read';
             readBtn.className = "readBtn";
 
+            removeBtn.addEventListener('click', (e) => {
+                // const id = e.target.dataset.bookId;
+                // e.target.parentElement.remove();
+                // removeBook(id);
+                console.log(e.target);
+            });
 
+            readBtn.addEventListener('click', (e) => {
+            //         updateRead(e);
+            console.log(e.target);
+
+            });
+            
             card.className = "card";
             card.dataset.uuid = book.id;
             card.appendChild(title);
@@ -77,7 +89,6 @@ function updateRead(e) {
     const bookToUpdate = myLibrary.find(book => book.id === id);
     if (bookToUpdate) {
         bookToUpdate.read = bookToUpdate.read === 0 ? 1 : 0;
-        console.log(bookToUpdate);
     } else {
         console.log("book not found");
     }

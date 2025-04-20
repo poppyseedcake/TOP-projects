@@ -29,23 +29,36 @@ function updateCards() {
             let author = document.createElement('p');
             let pages = document.createElement('p');
             let read = document.createElement('p');
-        
+            let removeBtn = document.createElement('button');
+
             title.textContent = `Title: ${book.title}`;
             author.textContent = `Author: ${book.author}`;
             pages.textContent = `Pages: ${book.pages}`;
             read.textContent = book.read === 0 ? 'not read' : 'read';
-        
+            removeBtn.textContent = 'Remove';
+            removeBtn.dataset.bookId = book.id;
+            removeBtn.className = "removeBtn";
+
             card.className = "card";
             card.dataset.uuid = book.id;
             card.appendChild(title);
             card.appendChild(author);
             card.appendChild(pages);
             card.appendChild(read);
-        
-            containerCards.appendChild(card);
+            card.appendChild(removeBtn);
+
+            containerCards.prepend(card);
+            
         }   
     });
 }
+
+function removeBook(id) {
+    myLibrary.forEach((book, index) => {
+        if (book.id === id) myLibrary.splice(index, 1);
+    });
+}
+
 
 const testBook1 = new Book(crypto.randomUUID(), 'Puchatek', 'Anders', 54, 0);
 const testBook2 = new Book(crypto.randomUUID(), 'Pony', 'Henry', 150, 1);
@@ -93,4 +106,14 @@ dialog.addEventListener('close', (e) => {
 submitBtn.addEventListener('click', (e) => {
     e.preventDefault();
     dialog.close('submit');
+});
+
+const removeBtn = document.querySelectorAll('.removeBtn');
+
+removeBtn.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+        let id = e.target.dataset.bookId;
+        e.target.parentElement.remove();
+        removeBook(id);
+    });
 });

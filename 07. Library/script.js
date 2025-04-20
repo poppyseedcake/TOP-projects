@@ -30,14 +30,20 @@ function updateCards() {
             let pages = document.createElement('p');
             let read = document.createElement('p');
             let removeBtn = document.createElement('button');
+            let readBtn = document.createElement('button');
+
 
             title.textContent = `Title: ${book.title}`;
             author.textContent = `Author: ${book.author}`;
             pages.textContent = `Pages: ${book.pages}`;
             read.textContent = book.read === 0 ? 'not read' : 'read';
+            read.className = "read";
             removeBtn.textContent = 'Remove';
             removeBtn.dataset.bookId = book.id;
             removeBtn.className = "removeBtn";
+            readBtn.textContent = book.read === 0 ? 'read' : 'not read';
+            readBtn.className = "readBtn";
+
 
             card.className = "card";
             card.dataset.uuid = book.id;
@@ -46,6 +52,7 @@ function updateCards() {
             card.appendChild(pages);
             card.appendChild(read);
             card.appendChild(removeBtn);
+            card.appendChild(readBtn);
 
             containerCards.prepend(card);
             
@@ -57,6 +64,24 @@ function removeBook(id) {
     myLibrary.forEach((book, index) => {
         if (book.id === id) myLibrary.splice(index, 1);
     });
+}
+
+function updateRead(e) {
+    const readP = e.target.parentElement.querySelector('.read');
+    const readBtn = e.target.parentElement.querySelector('.readBtn');
+    
+    readP.textContent = readP.textContent === 'read' ? 'not read' : 'read';
+    readBtn.textContent = readBtn.textContent === 'read' ? 'not read' : 'read';
+    
+    let id = e.target.parentElement.dataset.uuid;
+    const bookToUpdate = myLibrary.find(book => book.id === id);
+    if (bookToUpdate) {
+        bookToUpdate.read = bookToUpdate.read === 0 ? 1 : 0;
+        console.log(bookToUpdate);
+    } else {
+        console.log("book not found");
+    }
+    
 }
 
 
@@ -115,5 +140,13 @@ removeBtn.forEach((btn) => {
         let id = e.target.dataset.bookId;
         e.target.parentElement.remove();
         removeBook(id);
+    });
+});
+
+const readBtn = document.querySelectorAll('.readBtn');
+
+readBtn.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+        updateRead(e);
     });
 });
